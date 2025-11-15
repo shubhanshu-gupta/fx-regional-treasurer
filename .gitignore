@@ -1,0 +1,7 @@
+fx-backend/.venv/
+fx-backend/__pycache__/
+fx-backend/.env
+
+fx-frontend/node_modules/
+fx-frontend/dist/
+fx-frontend/.env
