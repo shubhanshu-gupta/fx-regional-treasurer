@@ -1,7 +1,6 @@
 from typing import Any, List
 
 import httpx
-from crewai_tools import tool
 from pydantic import BaseModel
 
 from .config import settings
@@ -32,7 +31,6 @@ REPUTABLE_DOMAINS = [
 ]
 
 
-@tool("serpapi_structured_news_search")
 def serpapi_structured_news_search(query: str) -> List[dict[str, Any]]:
     """Search for macro/FX-relevant news using SerpAPI, restricted to reputable domains.
 

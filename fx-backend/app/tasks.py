@@ -3,9 +3,6 @@ from typing import List
 from crewai import Task
 from pydantic import BaseModel
 
-from .news_tools import serpapi_structured_news_search
-
-
 class FxEvent(BaseModel):
     category: str
     headline: str
@@ -51,6 +48,5 @@ def build_daily_report_task(agent) -> Task:
         description=instructions,
         expected_output=expected_output,
         agent=agent,
-        tools=[serpapi_structured_news_search],
         output_pydantic=DailyReport,
     )
