@@ -222,7 +222,7 @@ flowchart LR
   end
 
   subgraph Tools[Tools / Data]
-    N[News Tools\n(SerpAPI, HTTP)]
+    N[News Tools (SerpAPI, HTTP)]
   end
 
   R -->|date + keys| E
