@@ -207,15 +207,15 @@ You can also think of it visually like this:
 
 ```mermaid
 flowchart LR
-  React[React Dashboard] -->|date + keys| Api[/POST /api/report/]
-  Streamlit[Streamlit App] -->|date + keys (env)| Agent
-  Api -->|run_daily_report(date)| Agent
+  React[React Dashboard] --> Api[/POST /api/report/]
+  Streamlit[Streamlit App] --> Agent
+  Api --> Agent
   Agent --> Task
   Task --> Tools
   Tools --> Task
-  Task -->|DailyReport| Api
-  Task -->|DailyReport| Streamlit
-  Api -->|JSON DailyReport| React
+  Task --> Api
+  Task --> Streamlit
+  Api --> React
 ```
 
 ### 8.1 Key backend components
