@@ -207,33 +207,15 @@ You can also think of it visually like this:
 
 ```mermaid
 flowchart LR
-  subgraph UI[User Interfaces]
-    R[React Dashboard]
-    S[Streamlit App]
-  end
-
-  subgraph API[FastAPI Backend]
-    E[/POST /api/report/]
-  end
-
-  subgraph Crew[ CrewAI Layer ]
-    A[Regional Treasurer Agent]
-    T[Daily Report Task]
-  end
-
-  subgraph Tools[Tools / Data]
-    N[News Tools (SerpAPI, HTTP)]
-  end
-
-  R -->|date + keys| E
-  S -->|date + keys (env)| A
-  E -->|call run_daily_report(date)| A
-  A --> T
-  T --> N
-  N --> T
-  T -->|DailyReport (executive_summary, items, actions)| E
-  T -->|DailyReport| S
-  E -->|JSON DailyReport| R
+  React[React Dashboard] -->|date + keys| Api[/POST /api/report/]
+  Streamlit[Streamlit App] -->|date + keys (env)| Agent
+  Api -->|run_daily_report(date)| Agent
+  Agent --> Task
+  Task --> Tools
+  Tools --> Task
+  Task -->|DailyReport| Api
+  Task -->|DailyReport| Streamlit
+  Api -->|JSON DailyReport| React
 ```
 
 ### 8.1 Key backend components
