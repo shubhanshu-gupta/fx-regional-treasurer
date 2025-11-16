@@ -24,36 +24,23 @@ export function FiltersBar({
   onCurrencyFilterChange,
 }: Props) {
   return (
-    <section
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.75rem',
-        alignItems: 'flex-end',
-      }}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <label style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Date</label>
+    <section className="flex flex-wrap items-end gap-3">
+      <div className="flex flex-col gap-1">
+        <label className="text-xs font-medium text-muted-foreground">Analysis Date</label>
         <input
           type="date"
           value={date}
           onChange={(e) => onDateChange(e.target.value)}
-          style={{
-            backgroundColor: '#020617',
-            borderRadius: 8,
-            border: '1px solid #374151',
-            color: '#e5e7eb',
-            padding: '0.35rem 0.5rem',
-          }}
+          className="rounded-md border border-input bg-background px-2 py-1 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <label style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Region</label>
+      <div className="flex flex-col gap-1">
+        <label className="text-xs font-medium text-muted-foreground">Region Filter</label>
         <select
           value={regionFilter}
           onChange={(e) => onRegionFilterChange(e.target.value)}
-          style={selectStyle}
+          className="min-w-[140px] rounded-md border border-input bg-background px-2 py-1 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
         >
           <option value="all">All</option>
           <option value="APAC">APAC</option>
@@ -62,12 +49,12 @@ export function FiltersBar({
         </select>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <label style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Category</label>
+      <div className="flex flex-col gap-1">
+        <label className="text-xs font-medium text-muted-foreground">Category Filter</label>
         <select
           value={categoryFilter}
           onChange={(e) => onCategoryFilterChange(e.target.value)}
-          style={selectStyle}
+          className="min-w-[160px] rounded-md border border-input bg-background px-2 py-1 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
         >
           <option value="all">All</option>
           <option value="Central Bank Policy">Central Bank Policy</option>
@@ -77,21 +64,14 @@ export function FiltersBar({
         </select>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <label style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Currency</label>
+      <div className="flex flex-col gap-1">
+        <label className="text-xs font-medium text-muted-foreground">Currency Filter</label>
         <input
           type="text"
           placeholder="All"
           value={currencyFilter === 'all' ? '' : currencyFilter}
           onChange={(e) => onCurrencyFilterChange(e.target.value || 'all')}
-          style={{
-            backgroundColor: '#020617',
-            borderRadius: 8,
-            border: '1px solid #374151',
-            color: '#e5e7eb',
-            padding: '0.35rem 0.5rem',
-            minWidth: 80,
-          }}
+          className="min-w-[80px] rounded-md border border-input bg-background px-2 py-1 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
@@ -99,28 +79,10 @@ export function FiltersBar({
         type="button"
         onClick={() => onRun(date)}
         disabled={loading}
-        style={{
-          marginLeft: 'auto',
-          padding: '0.5rem 1rem',
-          borderRadius: 999,
-          border: 'none',
-          backgroundColor: loading ? '#374151' : '#2563eb',
-          color: '#e5e7eb',
-          cursor: loading ? 'default' : 'pointer',
-          fontWeight: 500,
-        }}
+        className="ml-auto inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:opacity-90 disabled:cursor-default disabled:opacity-60"
       >
-        {loading ? 'Running…' : 'Run Daily Briefing'}
+        {loading ? 'Applying…' : 'Apply Filters'}
       </button>
     </section>
   );
 }
-
-const selectStyle: React.CSSProperties = {
-  backgroundColor: '#020617',
-  borderRadius: 8,
-  border: '1px solid #374151',
-  color: '#e5e7eb',
-  padding: '0.35rem 0.5rem',
-  minWidth: 140,
-};
