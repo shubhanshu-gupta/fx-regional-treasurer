@@ -21,15 +21,21 @@ def run_daily_report(run_date: Optional[str] = None) -> DailyReport:
 
     result = crew.kickoff(inputs={"date": today_str})
 
+    def _attach_date(report: DailyReport) -> DailyReport:
+        # Normalize the report date to the requested analysis date to avoid
+        # stale or hallucinated values coming back from the model.
+        report.date = today_str
+        return report
+
     if isinstance(result, DailyReport):
-        return result
+        return _attach_date(result)
 
     # If CrewOutput-like object, try to parse its raw JSON payload
     if hasattr(result, "raw") and isinstance(result.raw, str):
-        return DailyReport.model_validate_json(result.raw)
+        return _attach_date(DailyReport.model_validate_json(result.raw))
 
     # If we already have a dict-like structure, validate it directly
     if isinstance(result, dict):
-        return DailyReport.model_validate(result)
+        return _attach_date(DailyReport.model_validate(result))
 
     raise ValueError(f"Unexpected crew result type: {type(result)}")
